@@ -1,5 +1,5 @@
 export interface Task {
-  id: string; title: string; completed: boolean; date?: string; time?: string;
+  id: string; title: string; completed: boolean; description?: string; createdAt?: string; date?: string; time?: string;
   priority?: 'high' | 'medium' | 'low'; inProgress?: boolean;
   reminder?: string; recurrence?: string; category?: string;
   subtasks?: { id: string; title: string; completed: boolean }[];
@@ -16,13 +16,14 @@ export function read<T>(key: string, fallback: T, valid: (v: unknown) => v is T)
     return valid(value) ? value : fallback;
   } catch { return fallback; }
 }
-export function write<T>(key: string, value: T) {
-  memory.set(key, value);
+export function write<T>(key: string, value: T, requirePersistence = false) {
   try { localStorage.setItem(key, JSON.stringify(value)); }
   catch (error) {
     // TODO: connect approved persistence-failure feedback. Keep unsaved content in memory.
     window.dispatchEvent(new CustomEvent('little-magic:persistence-error', { detail: { key, error } }));
+    if (requirePersistence) throw new Error('Your task could not be saved. Please try again.');
   }
+  memory.set(key, value);
   window.dispatchEvent(new Event(changed));
 }
 export function subscribe(listener: () => void) {
@@ -33,13 +34,13 @@ export function subscribe(listener: () => void) {
 const optionalString = (v: unknown) => v === undefined || typeof v === 'string';
 export const validTasks = (v: unknown): v is Task[] => Array.isArray(v) && v.every(t =>
   t && typeof t.id === 'string' && typeof t.title === 'string' && typeof t.completed === 'boolean' &&
-  [t.date, t.time, t.reminder, t.recurrence, t.category].every(optionalString) &&
+  [t.date, t.time, t.reminder, t.recurrence, t.category, t.description, t.createdAt].every(optionalString) &&
   (t.priority === undefined || ['high', 'medium', 'low'].includes(t.priority)) &&
   (t.inProgress === undefined || typeof t.inProgress === 'boolean') &&
   (t.subtasks === undefined || Array.isArray(t.subtasks) && t.subtasks.every((s: Task) => s && typeof s.id === 'string' && typeof s.title === 'string' && typeof s.completed === 'boolean')));
 export const taskRepository = {
   all: () => read<Task[]>(keys.tasks, [], validTasks),
-  save(tasks: Task[]) { if (!validTasks(tasks)) throw new Error('Invalid task data'); write(keys.tasks, tasks); },
+  save(tasks: Task[]) { if (!validTasks(tasks)) throw new Error('Invalid task data'); write(keys.tasks, tasks, true); },
   upsert(task: Task) { const tasks = [...this.all()]; const i = tasks.findIndex(t => t.id === task.id); if (i < 0) tasks.push(task); else tasks[i] = task; this.save(tasks); },
 };
 export function localDay(date = new Date()) {

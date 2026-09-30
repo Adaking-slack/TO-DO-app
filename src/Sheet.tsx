@@ -1,5 +1,5 @@
 import { useId, useLayoutEffect, useRef, type ReactNode } from 'react';
-import { artwork } from './artwork';
+
 
 export function Sheet({ title, onClose, children, actions, floating = false, decorated = false, covered = false }: {
   title: string; onClose: () => void; children: ReactNode; actions?: ReactNode; floating?: boolean; decorated?: boolean; covered?: boolean;
@@ -39,7 +39,7 @@ export function Sheet({ title, onClose, children, actions, floating = false, dec
       element.close(); document.body.style.overflow = overflow; previous?.focus();
     };
   }, []);
-  return <dialog ref={dialog} className={`task-sheet paper${floating ? ' floating-sheet' : ''}`} data-covered={covered || undefined} aria-labelledby={headingId} onCancel={e => { e.preventDefault(); onClose(); }} onKeyDown={e => {
+  return <dialog ref={dialog} className={`task-sheet paper${floating ? ' floating-sheet' : ''}${decorated ? ' storybook-sheet' : ''}`} data-covered={covered || undefined} aria-labelledby={headingId} onCancel={e => { e.preventDefault(); onClose(); }} onKeyDown={e => {
     if (e.key !== 'Tab') return;
     const controls = [...e.currentTarget.querySelectorAll<HTMLElement>('button:not(:disabled), input:not(:disabled), textarea:not(:disabled), select:not(:disabled), [tabindex="0"]')].filter(el => el.getClientRects().length > 0);
     const first = controls[0], last = controls[controls.length - 1];
@@ -47,15 +47,11 @@ export function Sheet({ title, onClose, children, actions, floating = false, dec
     else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first?.focus(); }
   }}>
     <span className="paper-surface" aria-hidden="true" />
-    {decorated && <div className="sheet-decoration" aria-hidden="true">
-      <img className="sheet-twig" src={artwork.twig} alt="" />
-      <img className="sheet-vine" src={artwork.vine} alt="" />
-      <img className="sheet-sparkle" src={artwork.sparkle} alt="" />
-    </div>}
+    {decorated && <span className="sheet-handle" aria-hidden="true" />}
     <div className="sheet-body">
       <header className={`sheet-heading${actions ? ' composer-actions' : ''}`}>
         <h2 id={headingId} className={actions ? 'sr-only' : undefined}>{title}</h2>
-        <button type="button" className="text-button" onClick={onClose}>Close</button>
+        <button type="button" className={decorated ? "text-button storybook-close" : "text-button"} aria-label="Close" onClick={onClose}>{decorated ? <svg viewBox="0 0 24 24" className="ink-icon" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true"><path d="M6 6L18 18M18 6L6 18" /></svg> : "Close"}</button>
         {actions}
       </header>
       {children}

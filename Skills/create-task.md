@@ -28,3 +28,10 @@ the three-row reference layout over the earlier compact Priority utility row.
   Assets and decorative-only rules are recorded in icons.md and visual-language.md.
 - Persistence, Today/Inbox filtering, existing Task Rows, and parent/subtask
   completion semantics are reused unchanged.
+
+## Illustrated reference override
+The user explicitly corrected the subtle white implementation and selected the full illustrated reference. This screen now overrides the earlier restrained-edge treatment: warm watercolor parchment with a wooden botanical frame, dark blurred backdrop, round cream Close/X and purple seal-style checkmark, understated inline title and description, inset detail rows, and outlined Add sub-task. Labels remain accessible but are visually hidden within this composer. Functional controls stay live HTML and the existing persistence/pickers are retained. Other screens keep their existing tokens.
+
+Reference-derived screen values: backdrop rgba(15,9,19,.96), 5px blur; parchment ink #806b60, muted #93858c, outline #dec0a1; 20px inset group radius; 44px round actions; title 19px and details 16px sans-serif; section heading 24px Lora. Sheet height uses 78% of available visual viewport capped at 740px, while retaining the safe-area and 16px external inset.
+
+Artwork: public/assets/paper/create-task-parchment.png. Created with the built-in image generator from the user's reference. Prompt: isolated blank warm ivory watercolor parchment sheet, slender wooden frame, purple corner botanicals, small gold stars and hanging crescent; transparent outside; no text, controls, icons, or backdrop. The generated artwork supplies decoration only.

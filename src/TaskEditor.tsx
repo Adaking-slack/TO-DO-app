@@ -41,7 +41,7 @@ export function TaskEditor({ task, onClose, onSaved }: { task?: Task; onClose: (
     <Sheet title={task ? 'Task details' : 'Create Task'} floating decorated covered={Boolean(picker)} onClose={onClose}
       actions={<button className="primary-button paper save-task" type="submit" form={formId} aria-label={task ? 'Save changes' : 'Create Task'}><span className="paper-surface" aria-hidden="true" /><InkIcon name="check" /></button>}>
       <form id={formId} className="task-composer" onSubmit={submit} noValidate>
-        <Field label="Task title" id="task-title">
+        <div className="task-main-group"><Field label="Task title" id="task-title">
           <div className={`title-input${titleError ? ' invalid' : ''}`}><span className="checkbox-art" aria-hidden="true" />
             <input ref={titleRef} autoFocus id="task-title" required placeholder="Task title" value={draft.title}
               aria-invalid={titleError || undefined} aria-describedby={titleError ? 'title-error' : undefined}
@@ -51,7 +51,7 @@ export function TaskEditor({ task, onClose, onSaved }: { task?: Task; onClose: (
         </Field>
         <div className="task-details-group" role="group" aria-label="Task details">
           <div className="description-row"><img className="description-icon" src={artwork.description} alt="" aria-hidden="true" />
-            <Field label="Description" id="description"><textarea ref={descriptionRef} id="description" rows={1} className="form-input" value={draft.description ?? ''} placeholder="Add a little more detail" onChange={e => update('description', e.target.value)} /></Field>
+            <Field label="Description" id="description"><textarea ref={descriptionRef} id="description" rows={1} className="form-input" value={draft.description ?? ''} placeholder="Description" onChange={e => update('description', e.target.value)} /></Field>
           </div>
           <button type="button" className="detail-trigger" aria-label="Date and time" aria-haspopup="dialog" aria-describedby={draft.date ? 'schedule-summary' : undefined} onClick={() => setPicker('schedule')}>
             <InkIcon name="calendar" /><span>Date and time{draft.date && <span className="detail-value" id="schedule-summary">{formatSchedule(draft.date, draft.time)}</span>}</span><InkIcon name="chevron" />
@@ -59,6 +59,7 @@ export function TaskEditor({ task, onClose, onSaved }: { task?: Task; onClose: (
           <button type="button" className="detail-trigger" aria-label="Reminder" aria-haspopup="dialog" aria-describedby={draft.reminder ? 'reminder-summary' : undefined} onClick={() => setPicker('reminder')}>
             <InkIcon name="bell" /><span>Reminder{draft.reminder && <span className="detail-value" id="reminder-summary">{formatReminder(draft.reminder)}</span>}</span><InkIcon name="chevron" />
           </button>
+        </div>
         </div>
         <section className="composer-subtasks" aria-labelledby="subtask-heading"><h3 id="subtask-heading">Sub-task</h3>
           <button ref={addSubtaskButton} type="button" className="secondary-button paper" onClick={addSubtask}><span className="paper-surface" aria-hidden="true" /><InkIcon name="plus" />Add sub-task</button>

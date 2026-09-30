@@ -154,3 +154,36 @@ textarea.form-input { resize: none; overflow: hidden; overflow-wrap: anywhere; }
 .sheet-twig { width: 32px; right: -8px; top: 8px; }
 .sheet-vine { width: 24px; left: -6px; bottom: 8px; }
 .sheet-sparkle { width: 16px; left: 6px; bottom: 8px; }
+/* Reference artwork treatment, explicitly requested for the Create Task sheet. */
+.storybook-sheet { --story-ink: #806b60; --story-muted: #93858c; --story-line: #dec0a1; height: min(74vh, 740px); height: min(calc(var(--sheet-height, 100dvh) * .78), 740px); }
+.storybook-sheet::backdrop { background: rgba(15, 9, 19, .96); backdrop-filter: blur(5px); }
+.storybook-sheet[data-covered]::backdrop { background: transparent; backdrop-filter: none; }
+.storybook-sheet > .paper-surface { background: url('/assets/paper/create-task-parchment.png') center / 100% 100% no-repeat; mask: none; }
+.storybook-sheet > .paper-surface::after { content: none; }
+.storybook-sheet > .sheet-body { height: 100%; padding: 48px 24px 40px; }
+.sheet-handle { position: absolute; top: 36px; left: 50%; transform: translateX(-50%); width: 40px; height: 4px; border-radius: 4px; background: #c5ad96; pointer-events: none; }
+.storybook-sheet .composer-actions { margin-bottom: 16px; }
+.storybook-sheet .storybook-close, .storybook-sheet .save-task { width: 44px; height: 44px; min-height: 44px; padding: 8px; border-radius: 50%; border: 2px solid #d9b694; background: radial-gradient(circle at 35% 25%, #fff4df, #e9c6a3); color: #322036; box-shadow: 0 3px 0 #c5a081, inset 0 0 0 2px #f6ddbc; }
+.storybook-sheet .save-task { border-color: #694479; background: radial-gradient(circle at 35% 25%, #a278b6, #69417c); color: white; box-shadow: 0 3px 0 #563265, inset 0 0 0 2px #a27cb0; }
+.storybook-sheet .save-task .paper-surface { display: none; }
+.storybook-sheet .task-main-group { border: 1px solid var(--story-line); border-radius: 20px; padding: 12px 8px 8px; background: rgba(255, 251, 241, .24); }
+.storybook-sheet .task-main-group .form-field > label { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+.storybook-sheet .title-input { border: 0; background: transparent; padding: 4px 12px 16px; gap: 12px; }
+.storybook-sheet .title-input input { font-family: Arial, sans-serif; font-size: 19px; color: var(--story-ink); }
+.storybook-sheet .title-input input::placeholder { color: var(--story-muted); }
+.storybook-sheet .checkbox-art { border: 2px solid var(--story-muted); width: 20px; height: 20px; }
+.storybook-sheet .task-details-group { border: 0; border-radius: 16px; padding: 0 12px; background: rgba(218, 184, 143, .16); }
+.storybook-sheet .description-row { align-items: flex-start; padding: 12px 0; gap: 12px; }
+.storybook-sheet .description-row .form-field { gap: 0; }
+.storybook-sheet .description-row textarea { background: transparent; border: 0; padding: 0; font: 16px/1.5 Arial, sans-serif; color: var(--story-ink); }
+.storybook-sheet .description-icon { width: 20px; height: 24px; }
+.storybook-sheet .detail-trigger { position: relative; border: 0; gap: 12px; color: var(--story-muted); font: 16px/1.5 Arial, sans-serif; padding-block: 12px; }
+.storybook-sheet .detail-trigger::before { content: ''; position: absolute; top: 0; left: 36px; right: 0; border-top: 1px solid #b8a495; }
+.storybook-sheet .detail-trigger > .ink-icon { color: var(--story-ink); }
+.storybook-sheet .detail-trigger > .ink-icon:last-child { display: none; }
+.storybook-sheet .composer-subtasks { margin-top: 16px; }
+.storybook-sheet .composer-subtasks h3 { font-size: 24px; margin-bottom: 12px; }
+.storybook-sheet .secondary-button { justify-content: flex-start; gap: 12px; border: 1px solid var(--story-line); border-radius: 20px; background: rgba(255, 251, 241, .24); color: var(--story-muted); font: 16px/1.5 Arial, sans-serif; padding: 16px 20px; }
+.storybook-sheet .secondary-button > .paper-surface { display: none; }
+.storybook-sheet .secondary-button .ink-icon { color: var(--story-ink); }
+.storybook-sheet .title-input.invalid { outline: 1px solid var(--error); }

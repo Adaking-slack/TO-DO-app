@@ -97,18 +97,11 @@ test('floating geometry, scrim, transparent file assets and modal focus are corr
   const sheet = page.getByRole('dialog'); const bounds = await sheet.boundingBox();
   expect(bounds!.x).toBe(16); expect(390 - bounds!.x - bounds!.width).toBe(16); expect(844 - bounds!.y - bounds!.height).toBe(16);
   expect(await sheet.evaluate(el => getComputedStyle(el).borderRadius)).toBe('32px');
-  expect(await sheet.evaluate(el => getComputedStyle(el, '::backdrop').backgroundColor)).toBe('rgba(26, 15, 46, 0.4)');
+  expect(await sheet.evaluate(el => getComputedStyle(el, '::backdrop').backgroundColor)).toBe('rgba(15, 9, 19, 0.96)');
   for (let index = 0; index < 12; index++) { await page.keyboard.press('Tab'); expect(await page.evaluate(() => Boolean(document.activeElement?.closest('dialog')))).toBe(true); }
   const source = await page.locator('.description-icon').getAttribute('src'); expect(source).toContain('description.svg'); expect(source).not.toContain('data:');
-  const assets = await page.locator('.sheet-decoration img').evaluateAll(async images => Promise.all(images.map(async element => {
-    const img = element as HTMLImageElement; await img.decode();
-    const canvas = document.createElement('canvas'); canvas.width = img.naturalWidth; canvas.height = img.naturalHeight;
-    const ctx = canvas.getContext('2d')!; ctx.drawImage(img, 0, 0);
-    const data = ctx.getImageData(0, 0, canvas.width, canvas.height).data;
-    return { src: img.src, cornerAlpha: data[3], hasInk: data.some((v, i) => i % 4 === 3 && v > 0), events: getComputedStyle(img).pointerEvents, alt: img.alt };
-  })));
-  expect(assets).toHaveLength(3);
-  for (const asset of assets) { expect(asset.cornerAlpha).toBe(0); expect(asset.hasInk).toBe(true); expect(asset.events).toBe('none'); expect(asset.alt).toBe(''); }
+  expect(await page.locator('.storybook-sheet > .paper-surface').evaluate(el => getComputedStyle(el).backgroundImage)).toContain('create-task-parchment.png');
+  await expect(page.getByRole('button', { name: 'Close', exact: true })).toBeVisible();
   await page.getByRole('button', { name: 'Date and time', exact: true }).click();
   await page.getByRole('button', { name: 'Today', exact: true }).click(); await page.keyboard.press('Escape');
   await expect(page.getByRole('dialog', { name: 'Create Task', exact: true })).toBeVisible();

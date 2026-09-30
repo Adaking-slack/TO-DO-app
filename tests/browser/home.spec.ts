@@ -34,6 +34,10 @@ test('today filtering, completion, long-list clearance and action boundary', asy
   await expect(page.getByRole('heading', { name:'Today · 18' })).toBeVisible();
   await expect(page.getByText('Not today',{exact:true})).toHaveCount(0);
   await page.locator('input[type=checkbox]').first().check();
+  await page.locator('input[type=checkbox]').nth(1).check();
+  await expect(page.locator('input[type=checkbox]').nth(1)).toBeChecked();
+  await page.locator('input[type=checkbox]').nth(1).uncheck();
+  await expect(page.locator('input[type=checkbox]').nth(1)).not.toBeChecked();
   await page.reload(); await expect(page.locator('input[type=checkbox]').first()).toBeChecked();
   await expect(page.locator('.task-row').first()).toHaveClass(/completed/);
   await page.evaluate(()=>window.scrollTo(0,document.body.scrollHeight));
@@ -52,6 +56,8 @@ test('narrow phone, growing note, keyboard focus and reduced motion', async ({ p
   await note.fill(Array(30).fill('longwordexample').join(' '));
   expect(await note.evaluate(el=>el.scrollHeight<=el.clientHeight+1)).toBe(true);
   expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
+  const writing = await note.boundingBox(), floating = await page.locator('.fab').boundingBox();
+  expect(writing!.y + writing!.height).toBeLessThanOrEqual(floating!.y - 24 + 1);
   await page.keyboard.press('Tab');
   expect(await page.locator('.fab').evaluate(el=>getComputedStyle(el).transitionDuration)).toBe('0s');
   await page.screenshot({path:'test-results/home-narrow.png'});

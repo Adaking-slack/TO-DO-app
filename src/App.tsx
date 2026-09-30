@@ -42,7 +42,7 @@ export function App() {
   };
   return <>
     <main className="home" id="main-content">
-      <header className="opening"><h1>A little magic, one task at a time.</h1><PersonalNote /></header>
+      <header className="opening"><PersonalNote /></header>
       <section className="today" aria-labelledby="today-heading">
         <h2 id="today-heading">Today <span className="task-count">· {today.length}</span></h2>
         {today.length > 0 && <ul className="task-list">{today.map(task => <TaskRow key={task.id} task={task} now={now} onToggle={toggle} />)}</ul>}

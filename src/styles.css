@@ -25,7 +25,6 @@ html { scroll-padding-bottom: calc(var(--bottom-clearance) + var(--keyboard-inse
 .home { padding: calc(env(safe-area-inset-top, 0px) + var(--s4)) max(var(--s4), env(safe-area-inset-right, 0px)) calc(var(--bottom-clearance) + var(--keyboard-inset)) max(var(--s4), env(safe-area-inset-left, 0px)); }
 h1, h2 { margin: 0; font-size: 24px; font-weight: 600; line-height: 1.2; letter-spacing: 0; text-align: start; text-wrap: balance; }
 .opening { display: grid; gap: var(--s4); }
-.opening h1 { font-size: 12px; }
 .today { margin-block-start: var(--s8); }
 .task-count { font-variant-numeric: tabular-nums; }
 .empty-state { display: flex; flex-direction: column; align-items: center; text-align: center; padding-block: var(--s8); }

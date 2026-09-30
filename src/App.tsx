@@ -46,6 +46,11 @@ export function App() {
       <section className="today" aria-labelledby="today-heading">
         <h2 id="today-heading">Today <span className="task-count">· {today.length}</span></h2>
         {today.length > 0 && <ul className="task-list">{today.map(task => <TaskRow key={task.id} task={task} now={now} onToggle={toggle} />)}</ul>}
+        {today.length === 0 && <div className="empty-state">
+          <img src="/assets/empty-home.png" alt="" width="1536" height="1024" />
+          <h3>The page is yours</h3>
+          <p>What would you like to make happen today?</p>
+        </div>}
       </section>
     </main>
     <button className="fab paper" aria-label="Create task" onClick={() => requestAction({ type: 'create-task' })}>

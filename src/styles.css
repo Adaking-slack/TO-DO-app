@@ -25,13 +25,15 @@ html { scroll-padding-bottom: calc(var(--bottom-clearance) + var(--keyboard-inse
 .home { padding: calc(env(safe-area-inset-top, 0px) + var(--s4)) max(var(--s4), env(safe-area-inset-right, 0px)) calc(var(--bottom-clearance) + var(--keyboard-inset)) max(var(--s4), env(safe-area-inset-left, 0px)); }
 h1, h2 { margin: 0; font-size: 24px; font-weight: 600; line-height: 1.2; letter-spacing: 0; text-align: start; text-wrap: balance; }
 .opening { display: grid; gap: var(--s4); }
+.opening h1 { font-size: 12px; }
 .today { margin-block-start: var(--s8); }
 .task-count { font-variant-numeric: tabular-nums; }
 .paper { position: relative; isolation: isolate; }
 .paper-surface { position: absolute; inset: 0; z-index: -1; pointer-events: none; background: var(--surface); mask: var(--paper-mask) 0 0 / 100% 100% no-repeat; }
 .paper-surface::after { content: ''; position: absolute; inset: 0; background: url('/assets/paper/fine-grain.svg') repeat; opacity: var(--texture-opacity); }
-.personal-note { --paper-mask: url('/assets/paper/note.svg'); --texture-opacity: .08; min-height: 96px; padding: var(--s4); border-radius: 16px; box-shadow: var(--elevation-1); cursor: text; }
-.personal-note:focus-within { box-shadow: var(--elevation-2); }
+.personal-note { min-height: clamp(140px, 22vw, 360px); padding: clamp(32px, 6vw, 96px) 9% clamp(24px, 4vw, 64px); border-radius: 24px; cursor: text; }
+.personal-note .paper-surface { background: url('/assets/paper/note-watercolor.png') 50% 60% / 104% 150% no-repeat; mask: none; }
+.personal-note .paper-surface::after { content: none; }
 .personal-note:has(textarea:focus-visible) { outline: 2px solid var(--brand); outline-offset: 2px; }
 .personal-note textarea { display: block; width: 100%; min-height: 64px; resize: none; overflow: hidden; line-height: 1.5; font-size: 15px; outline: none; border-radius: 0; overflow-wrap: anywhere; }
 .personal-note textarea::placeholder { color: var(--muted); opacity: 1; }

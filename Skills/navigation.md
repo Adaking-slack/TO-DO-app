@@ -5,7 +5,7 @@ Four destinations:
 1. Home
 2. Inbox
 3. Calendar
-4. Projects
+4. Profile (user profile)
 
 Inbox is the capture destination for tasks lacking scheduling/organizational information. The exact qualification rules beyond the currently understood no-date use case remain intentionally undefined until the Inbox workflow is designed.
 

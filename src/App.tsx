@@ -9,10 +9,11 @@ const iconFrames: Record<string, { viewBox: string; width: number; height: numbe
   home: { viewBox: '415 436 424 387', width: 1254, height: 1254 },
   inbox: { viewBox: '218 182 957 759', width: 1392, height: 1130 },
   calendar: { viewBox: '147 165 962 963', width: 1254, height: 1254 },
+  profile: { viewBox: '98 21 1125 1183', width: 1278, height: 1230 },
 };
 const destinations: { name: Destination; icon?: string }[] = [
   { name: 'Home', icon: 'home' }, { name: 'Inbox', icon: 'inbox' },
-  { name: 'Calendar', icon: 'calendar' }, { name: 'Projects' },
+  { name: 'Calendar', icon: 'calendar' }, { name: 'Profile', icon: 'profile' },
 ];
 export function App() {
   const [tasks, setTasks] = useState(taskRepository.all);

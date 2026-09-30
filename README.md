@@ -35,11 +35,11 @@ npm run test:browser
 
 ## Integration boundaries / outstanding decisions
 
-`src/actions.ts` dispatches the typed `little-magic:action` event. Create Task, task details, Inbox, Calendar and Projects intentionally have no invented destination UI. Attach future approved routes at this boundary. Home remains the active screen until these destinations are implemented.
+`src/actions.ts` dispatches the typed `little-magic:action` event. Create Task, task details, Inbox, Calendar and Profile intentionally have no invented destination UI. Attach future approved routes at this boundary. Home remains the active screen until these destinations are implemented.
 
 Use `taskRepository.upsert(task)` / `.save(tasks)` to connect the future creation flow. Task data uses `little-magic.tasks.v1`; the note uses `little-magic.note.v1`. This is an implementation storage contract, not a finalized product database schema.
 
-- **Projects artwork:** the only fourth source asset is named `profile` and depicts a person. It is not silently repurposed as Projects. Its icon slot is reserved, without a generated replacement; supply/identify the intended Projects asset.
+- **Profile artwork:** the fourth navigation destination is the user profile and uses the authored `profile` asset.
 - **Parent completion confirmation:** tasks with unfinished subtasks emit `confirm-parent-completion` without changing completion. Connect the approved confirmation experience before allowing that transition.
 - **Storage failures:** unsaved data is retained in memory and a `little-magic:persistence-error` event is emitted. The visible failure/retry experience remains undefined; no success claim or invented toast is shown.
 - Task creation/details and non-Home destination designs remain future screen work as instructed.

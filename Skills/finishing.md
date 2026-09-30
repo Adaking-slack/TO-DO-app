@@ -59,3 +59,10 @@ Focus rings are separate and remain 2px with a 2px offset.
 
 ## Elevation
 Use `elevation.md`. Do not invent component-specific shadows.
+
+## Modal / Sheet Scrim
+- Approved reusable scrim: `rgba(26, 15, 46, 0.40)`.
+- Covers the viewport behind the active sheet or secondary picker.
+- Underlying content stays visible but non-interactive.
+- No blur, gradient, or texture. Active sheets stay clear above it.
+- Nested pickers use one active scrim rather than accumulating overlays.

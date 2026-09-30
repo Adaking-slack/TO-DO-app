@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 176" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <!-- Transparent storybook artwork. Illustration colors are not UI tokens. -->
+  <path d="M19 168C31 144 35 125 43 103S60 54 74 15" stroke="#49394f" stroke-width="2.8"/>
+  <path d="M22 160Q34 130 42 106T71 24" stroke="#a98c87" stroke-width="1"/>
+  <g stroke="#514056" stroke-width="1.8">
+    <path d="M32 138C9 130 9 109 13 99C27 107 38 120 32 138Z" fill="#a891b3"/>
+    <path d="M36 124C44 104 65 103 79 107C67 122 52 131 36 124Z" fill="#c3b599"/>
+    <path d="M46 95C27 83 27 63 33 54C45 64 51 80 46 95Z" fill="#b19bbb"/>
+    <path d="M54 76C64 57 79 55 91 59C82 75 68 80 54 76Z" fill="#b9a1bd"/>
+    <path d="M65 44C53 33 57 15 66 7C73 21 73 31 65 44Z" fill="#c6b6ce"/>
+    <path d="M73 22C77 10 86 5 91 5C92 16 84 24 73 22Z" fill="#9c81aa"/>
+  </g>
+  <path d="M32 137L17 106M37 123Q55 117 71 110M46 94L35 62M55 75L84 61M65 43L65 15M73 22L87 9" stroke="#6b5672" stroke-width="1.1"/>
+  <path d="M17 114Q19 122 25 127M41 116L62 109M34 67L40 80M64 68L78 62" stroke="#eee1e9" stroke-width="1.5" opacity=".7"/>
+</svg>

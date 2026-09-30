@@ -42,7 +42,8 @@ test('today filtering, completion, long-list clearance and action boundary', asy
   await expect(page.locator('.task-row').first()).toHaveClass(/completed/);
   await page.evaluate(()=>window.scrollTo(0,document.body.scrollHeight));
   const last = await page.locator('.task-row').last().boundingBox(), fab = await page.locator('.fab').boundingBox();
-  expect(last!.y + last!.height).toBeLessThanOrEqual(fab!.y - 24);
+  // Browser scroll offsets round to whole pixels; layout bounds retain subpixels.
+  expect(last!.y + last!.height).toBeLessThanOrEqual(fab!.y - 24 + 1);
   expect(await page.evaluate(()=>document.documentElement.scrollWidth <= innerWidth)).toBe(true);
   await page.evaluate(()=>window.addEventListener('little-magic:action',e=>{ (window as any).lastAction=(e as CustomEvent).detail; }));
   await page.getByRole('button',{name:'Create task',exact:true}).click();

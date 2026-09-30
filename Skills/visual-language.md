@@ -238,6 +238,14 @@ Magical objects such as books, potions, candles, crystals, moons, botanicals, an
 - Enough simplification to remain legible at mobile sizes
 
 ## Decorative Elements
+Create Task artwork is available at `Icon/decorative/twig.svg`,
+`Icon/decorative/vine.svg`, and `Icon/decorative/sparkle.svg`.
+These are decorative-only transparent SVG files. Keep them along outer
+edges/corners, outside text and controls, with `pointer-events: none` and
+empty alt text / `aria-hidden`. They must not affect layout or scrolling.
+The composer uses two restrained decorative moments: a corner twig and
+an opposite-edge vine with a small sparkle. Do not repeat them to fill space.
+
 Approved decorative vocabulary includes:
 
 - Small sparkles

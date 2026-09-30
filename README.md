@@ -35,26 +35,31 @@ npm run test:browser
 
 ## Integration boundaries / outstanding decisions
 
-`src/actions.ts` dispatches the typed `little-magic:action` event. Create Task, task details, Inbox, Calendar and Profile intentionally have no invented destination UI. Attach future approved routes at this boundary. Home remains the active screen until these destinations are implemented.
+`src/actions.ts` dispatches the typed `little-magic:action` event. App connects Create Task, task editing, Home/Inbox navigation, and unfinished-subtask confirmation. Calendar and Profile remain future destinations.
 
-Use `taskRepository.upsert(task)` / `.save(tasks)` to connect the future creation flow. Task data uses `little-magic.tasks.v1`; the note uses `little-magic.note.v1`. This is an implementation storage contract, not a finalized product database schema.
+TaskEditor uses `taskRepository.upsert(task)` to persist creates and edits. Task data uses `little-magic.tasks.v1`; the note uses `little-magic.note.v1`. Records contain ID, title, completion, creation timestamp, optional description/date/time/reminder/priority/category/recurrence, and subtasks (ID/title/completion). Legacy records without description or creation timestamp still load.
 
 - **Profile artwork:** the fourth navigation destination is the user profile and uses the authored `profile` asset.
-- **Parent completion confirmation:** tasks with unfinished subtasks emit `confirm-parent-completion` without changing completion. Connect the approved confirmation experience before allowing that transition.
-- **Storage failures:** unsaved data is retained in memory and a `little-magic:persistence-error` event is emitted. The visible failure/retry experience remains undefined; no success claim or invented toast is shown.
-- Task creation/details and non-Home destination designs remain future screen work as instructed.
+- **Parent completion:** a confirmation sheet explains that unfinished subtasks remain incomplete. Cancel leaves the parent unchanged. Subtask completion is edited separately and committed with Save changes.
+- **Storage failures:** failed task writes leave the editor open with its draft and an inline error; no in-memory task is presented as durably saved. Note writes retain their existing in-memory fallback. Both emit `little-magic:persistence-error`.
+- **Routing:** Home filters by the local calendar day. Inbox filters for no due date. Future/past tasks remain persisted for future calendar views; they do not create extra Home sections. The current destination stays open after creation.
+- **Composer scope:** the confirmed reference layout has a left Close action and right save checkmark, Task Title with a checkbox-style visual, exactly three detail rows (Description, Date and time, Reminder), then Sub-task and Add sub-task. No Priority, Category, Recurrence, Add Details disclosure, or bottom Cancel/submit action. Existing excluded properties are preserved when editing older tasks.
+- **Reminders:** one local date/time value is saved; notification delivery/permissions remain undefined. Existing reminder text is preserved on edit unless explicitly replaced or removed.
+- **Subtask scheduling:** date/time/reminder controls are deferred because the existing subtask model only supports title/completion.
+- **Picker presentation:** Date and time and Reminder open focused secondary sheets with the existing platform-native picker controls. Apply commits to the composer draft; Close/Escape discards only the secondary edit and restores focus to its trigger. Reminders keep the single absolute local date/time model; no relative offsets are invented.
+- **Sheet finish:** the composer and pickers float 16px from the side/bottom safe edges with 32px corners, the existing paper mask/texture, Level 2 elevation, and the approved `rgba(26, 15, 46, 0.40)` scrim. Only the active overlay supplies the scrim.
+- **New file-backed artwork:** `Icon/description.svg` is provisional. `Icon/decorative/twig.svg`, `vine.svg`, and `sparkle.svg` are individual transparent SVGs with no baked backgrounds or shadows. `src/artwork.ts` references them with explicit `?no-inline` URLs in development and production. Edge decorations are non-interactive and hidden from assistive technology.
 - **Approved text contrast:** placeholder `#8C8490` on `#FFFBFF` measures 3.52:1; completed metadata `#AAA2AD` on `#F6EBFE` measures 2.15:1. These supplied colors are retained. The accessibility requirement and these text-color assignments need review rather than an unapproved color substitution.
 
 ## Home-specific implementation choices
 
 User authorization in the attached build instruction permits these technical derivations, without creating global design-system rules:
 
-- Greeting and Today use approved H2 typography (semantic h1/h2 respectively).
-- Greeting-to-note uses the approved 16px related-group spacing; Today begins 32px after the opening group.
+- The greeting was removed at the user's request; Today uses approved H2 typography and begins 32px after the note.
 - Note counter sits 8px below writing. Note structural geometry uses 16px rounding; the authored paper mask supplies its visible contour.
 - Navigation images fit inside a 32px artwork slot in the existing 40×32px indicator region, preserving aspect ratio and supplied pixels. SVG display viewports exclude transparent export margins; the source artwork is unchanged.
 - Priority/metadata functional symbols use the approved 16px/1.5px stroke relationship; the FAB uses 24px/2px. These small functional SVGs are authored in code, not taken from an icon library. Navigation uses supplied artwork only.
 - CSS stacking levels, SVG path coordinates, asset dimensions and storage keys are implementation details, not new global tokens.
 - Bottom content clearance includes navigation, safe area, FAB, its 16px gap and the specified 24px separation. VisualViewport updates accommodate the actual software keyboard.
 
-Existing specifications were not rewritten as part of this implementation. Component-specific files and finishing/elevation rules supersede stale statements that those areas are undefined in older general files.
+The approved scrim and new assets are documented in finishing.md, icons.md, and visual-language.md. The confirmed composer layout is recorded in create-task.md. Unrelated design-system decisions remain unchanged.

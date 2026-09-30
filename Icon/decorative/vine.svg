@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 288" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <!-- Elongated transparent edge botanical; no backdrop or baked shadow. -->
+  <path d="M29 278C15 244 47 219 33 185S20 145 34 112S18 68 33 15" stroke="#574353" stroke-width="2.3"/>
+  <path d="M29 269C21 242 44 216 34 190M30 151Q28 133 34 116M30 72Q27 47 33 22" stroke="#b09792" stroke-width=".9"/>
+  <g stroke="#665069" stroke-width="1.4">
+    <path d="M26 252Q3 242 9 220Q28 231 26 252Z" fill="#bda9c4"/>
+    <path d="M30 238Q36 213 56 212Q53 233 30 238Z" fill="#b7ad91"/>
+    <path d="M37 203Q50 192 55 175Q37 177 37 203Z" fill="#af98b9"/>
+    <path d="M31 178Q8 173 10 153Q27 157 31 178Z" fill="#c8b7cb"/>
+    <path d="M27 152Q39 132 56 135Q47 152 27 152Z" fill="#bcb395"/>
+    <path d="M33 121Q12 114 10 94Q27 97 33 121Z" fill="#b09abc"/>
+    <path d="M35 102Q51 96 56 76Q35 78 35 102Z" fill="#c1acc9"/>
+    <path d="M29 74Q11 67 12 48Q28 57 29 74Z" fill="#b6a9a0"/>
+    <path d="M29 49Q47 42 49 25Q31 31 29 49Z" fill="#a68bb3"/>
+    <path d="M33 22Q25 10 34 3Q42 13 33 22Z" fill="#c6b0ce"/>
+  </g>
+  <path d="M26 250L13 228M32 235L49 217M38 199L49 182M29 175L14 159M29 150L49 139M32 117L15 101M37 99L50 82M28 70L16 54M31 45L44 31" stroke="#78627e" stroke-width=".9"/>
+  <g fill="#b79cc2" stroke="#70567a" stroke-width="1"><path d="M30 264Q40 256 43 259Q48 266 39 271Q34 273 30 264Z"/><path d="M29 88Q18 83 18 77Q24 72 29 80Z"/></g>
+</svg>

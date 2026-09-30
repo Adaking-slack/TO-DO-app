@@ -283,6 +283,14 @@ Icon-specific requirements:
 
 ## Asset Strategy
 
+### Create Task assets
+- `Icon/description.svg`: provisional file-backed Description icon, 24px with 2px rounded Mixed Ink strokes. Replaceable without changing component API/layout.
+- `Icon/decorative/twig.svg`: transparent short leafy branch for paper corners.
+- `Icon/decorative/vine.svg`: transparent elongated botanical for paper edges.
+- `Icon/decorative/sparkle.svg`: transparent, restrained star cluster.
+- Decorative assets have no background or baked shadow. Each is a separate reusable file.
+- File references live in `src/artwork.ts`. Existing `InkIcon` calendar, bell, and checkmark artwork is reused without duplication.
+
 The actual icon family will be designed separately after the icon system is defined.
 
 Approved icons should be deliberate assets with consistent artwork rather than runtime-randomized variations.
